@@ -5,28 +5,53 @@ def main(pagina:ft.Page):
     pagina.bgcolor = "#DBEBFF"
     pagina.horizontal_alignment = "center"
     pagina.window.width = 600
-    pagina.window.width = 800 
+    pagina.window.width = 1000 
     pagina.spacing = 20 
 
+
     def calcular_peso():
+        if campo_altura.value == "":
+            mensagem = ft.SnackBar(content="O campo  altura precisa ser preechido",
+            duration= 4000)
+            pagina.show_dialog(mensagem)
+            return
+        if campo_peso.value == "":
+            mensagem = ft.SnackBar(content="O campo peso precisa ser preechido",
+            duration= 4000)
+            pagina.show_dialog(mensagem)
+            return
         altura = float(campo_altura.value)
         peso = float(campo_peso.value)
         conta = peso / (altura*altura)
 
+       
+
         if conta <= 18.5:
             resultado = "Magreza"
+            imagem_pesos.src= "img/magresa2.png"
+
         elif conta > 18.5 and conta <= 24.9:
+            imagem_pesos.src= "img/normal.png"
             resultado = "Normal"
         elif conta >= 25 and conta <=29.9:
             resultado = "Sobrepeso"
+            imagem_pesos.src= "img/acimadopeso.png"
         elif conta >= 30 and conta <= 34.9:
             resultado = "Obesidade I"
+            imagem_pesos.src= "img/ob1.png"
         elif conta >= 35 and conta <= 39.9:
             resultado= "Obesidade II"
+            imagem_pesos.src= "img/ob2.png"
         elif conta >= 40:
             resultado = "Obesidade III"
+            imagem_pesos.src= "img/ob3.png"
 
-        campo_resultado.value = resultado
+        campo_resultado.value= resultado
+
+    imagem_pesos = ft.Image(src="#",
+                            visible= True,
+                            width=200,
+                            height=300)
 
 
 
@@ -71,8 +96,13 @@ def main(pagina:ft.Page):
     pagina.controls = [titulo,
                        linha,
                        botao,
-                       campo_resultado]
+                       campo_resultado,
+                       imagem_pesos
+                       
+                       ]
+   
     pagina.update()
+
 
 
 
